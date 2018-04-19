@@ -4,12 +4,46 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
   <title>Stencil Component Starter</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    ul {
+      display: inline-block;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+    li {
+      display: inline-block;
+    }
+    .break a {
+      cursor: default;
+    }
+  </style>
   <script src="/build/mycomponent.js"></script>
 
 </head>
 <body>
 
-  <my-component first="Stencil" last="'Don't call me a framework' JS"></my-component>
+  <!-- <my-component first="Stencil" last="'Don't call me a framework' JS"></my-component> -->
 
+  <h1 id="derp"></h1>
+
+  <pagination-box-view
+    break-class-name="break-me"
+    container-class-name="pagination"
+    active-class-name="active"
+    id="pagination-comp"
+    page-count="10"></pagination-box-view>
+
+  <script>
+    var h1 = document.getElementById('derp');
+    h1.innerText = 1;
+    var comp = document.getElementById('pagination-comp');
+
+    comp.addEventListener('onPageChange', function (e) {
+      var data = e.detail;
+      console.log('data', data);
+      h1.innerText = data.selected + 1;
+    });
+  </script>
 </body>
 </html>

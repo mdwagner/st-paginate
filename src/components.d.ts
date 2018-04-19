@@ -27,33 +27,70 @@ declare global {
 declare global {
 
   namespace StencilComponents {
-    interface MyComponent {
-      'first': string;
-      'last': string;
+    interface PaginationBoxView {
+      'activeClassName': string;
+      'breakClassName': string;
+      'containerClassName': string;
+      'disableInitialCallback': boolean;
+      'disabledClassName': string;
+      'extraAriaContext': string;
+      'forcePage': number;
+      'initialPage': number;
+      'marginPagesDisplayed': number;
+      'nextClassName': string;
+      'nextLinkClassName': string;
+      'pageClassName': string;
+      'pageCount': number;
+      'pageLinkClassName': string;
+      'pageRangeDisplayed': number;
+      'previousClassName': string;
+      'previousLinkClassName': string;
+      'showDefaultBreakLabel': boolean;
+      'showDefaultNextLabel': boolean;
+      'showDefaultPreviousLabel': boolean;
     }
   }
 
-  interface HTMLMyComponentElement extends StencilComponents.MyComponent, HTMLStencilElement {}
+  interface HTMLPaginationBoxViewElement extends StencilComponents.PaginationBoxView, HTMLStencilElement {}
 
-  var HTMLMyComponentElement: {
-    prototype: HTMLMyComponentElement;
-    new (): HTMLMyComponentElement;
+  var HTMLPaginationBoxViewElement: {
+    prototype: HTMLPaginationBoxViewElement;
+    new (): HTMLPaginationBoxViewElement;
   };
   interface HTMLElementTagNameMap {
-    'my-component': HTMLMyComponentElement;
+    'pagination-box-view': HTMLPaginationBoxViewElement;
   }
   interface ElementTagNameMap {
-    'my-component': HTMLMyComponentElement;
+    'pagination-box-view': HTMLPaginationBoxViewElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      'my-component': JSXElements.MyComponentAttributes;
+      'pagination-box-view': JSXElements.PaginationBoxViewAttributes;
     }
   }
   namespace JSXElements {
-    export interface MyComponentAttributes extends HTMLAttributes {
-      'first'?: string;
-      'last'?: string;
+    export interface PaginationBoxViewAttributes extends HTMLAttributes {
+      'activeClassName'?: string;
+      'breakClassName'?: string;
+      'containerClassName'?: string;
+      'disableInitialCallback'?: boolean;
+      'disabledClassName'?: string;
+      'extraAriaContext'?: string;
+      'forcePage'?: number;
+      'initialPage'?: number;
+      'marginPagesDisplayed'?: number;
+      'nextClassName'?: string;
+      'nextLinkClassName'?: string;
+      'onOnPageChange'?: (event: CustomEvent) => void;
+      'pageClassName'?: string;
+      'pageCount'?: number;
+      'pageLinkClassName'?: string;
+      'pageRangeDisplayed'?: number;
+      'previousClassName'?: string;
+      'previousLinkClassName'?: string;
+      'showDefaultBreakLabel'?: boolean;
+      'showDefaultNextLabel'?: boolean;
+      'showDefaultPreviousLabel'?: boolean;
     }
   }
 }
