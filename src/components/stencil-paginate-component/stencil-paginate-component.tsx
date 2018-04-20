@@ -11,70 +11,57 @@ import {
 type Noop = (...args) => any;
 const noop: Noop = () => {};
 
-@Component({
-  tag: 'break-view',
-  scoped: false,
-  shadow: false
-})
-export class BreakView {
-  @Prop() label: string;
-  @Prop() breakClassName: string = 'break';
+function BreakView({
+  breakLabel: label,
+  breakClassName: className = 'break',
+  ...props
+}) {
 
-  render() {
-    return (
-      <li class={this.breakClassName}>
-        {this.label || <slot name="breakLabel" />}
-      </li>
-    );
-  }
+  return (
+    <li class={className} {...props}>
+      {label || <slot name="breakLabel" />}
+    </li>
+  );
 }
 
-@Component({
-  tag: 'page-view',
-  scoped: false,
-  shadow: false
-})
-export class PageView {
-  @Prop() pageClassName: string;
-  @Prop() pageLinkClassName: string;
-  @Prop() href: string;
-  @Prop() page: number;
-  @Prop() extraAriaContext: string;
-  @Prop() selected: boolean;
-  @Prop() activeClassName: string;
+function PageView({
+  onClick = noop,
+  selected,
+  pageClassName,
+  pageLinkClassName,
+  activeClassName,
+  extraAriaContext,
+  href,
+  page,
+  ...props
+}) {
+  let cssClassName = pageClassName;
+  let ariaLabel = `Page ${page}${extraAriaContext ? ' ' + extraAriaContext : ''}`;
+  let ariaCurrent = null;
 
-  @Event() onClick: EventEmitter;
-
-  render() {
-    let cssClassName = this.pageClassName;
-    let ariaLabel = `Page ${this.page}${this.extraAriaContext ? ' ' + this.extraAriaContext : ''}`;
-    let ariaCurrent = null;
-
-    if (this.selected) {
-      ariaCurrent = 'page';
-      ariaLabel = `Page ${this.page} is your current page`;
-      if (typeof cssClassName !== 'undefined') {
-        cssClassName += ` ${this.activeClassName}`;
-      } else {
-        cssClassName = this.activeClassName;
-      }
+  if (selected) {
+    ariaCurrent = 'page';
+    ariaLabel = `Page ${page} is your current page`;
+    if (typeof cssClassName !== 'undefined') {
+      cssClassName += ` ${activeClassName}`;
+    } else {
+      cssClassName = activeClassName;
     }
-
-    console.log('page', this.page);
-    return (
-      <li class={cssClassName}>
-        <a onClick={(e) => this.onClick.emit(e)}
-          class={this.pageLinkClassName}
-          href={this.href}
-          tabIndex={0}
-          aria-label={ariaLabel}
-          aria-current={ariaCurrent}
-          onKeyPress={(e) => this.onClick.emit(e)}>
-          <slot name="page" />
-        </a>
-      </li>
-    );
   }
+
+  return (
+    <li class={cssClassName || undefined} {...props}>
+      <a onClick={onClick}
+        class={pageLinkClassName}
+        href={href}
+        tabIndex={0}
+        aria-label={ariaLabel}
+        aria-current={ariaCurrent}
+        onKeyPress={onClick}>
+        {page}
+      </a>
+    </li>
+  );
 }
 
 @Component({
@@ -183,19 +170,17 @@ export class PaginationBoxView {
   getPageElement(index) {
     const { selected } = this.state;
 
-    return (
-      <page-view
-        key={index}
-        onClick={(e) => this.handlePageSelected(index, e)}
-        selected={selected === index}
-        pageClassName={this.pageLinkClassName}
-        activeClassName={this.activeClassName}
-        extraAriaContext={this.extraAriaContext}
-        href={this.hrefBuilder(index)}
-        page={index + 1}>
-        <span slot="page">{index + 1}</span>
-      </page-view>
-    );
+    return PageView({
+      key: index,
+      onClick: this.handlePageSelected.bind(this, index),
+      selected: selected === index,
+      pageClassName: this.pageClassName,
+      pageLinkClassName: this.pageLinkClassName,
+      activeClassName: this.activeClassName,
+      extraAriaContext: this.extraAriaContext,
+      href: this.hrefBuilder(index),
+      page: index + 1
+    });
   }
 
   pagination = () => {
@@ -242,16 +227,11 @@ export class PaginationBoxView {
         }
 
         if (this.showDefaultBreakLabel && items[items.length - 1] !== breakView) {
-          breakView = (
-            <break-view
-              key={index}
-              breakClassName={this.breakClassName}>
-              {this.showDefaultBreakLabel ?
-                <span slot="breakLabel">...</span>
-                :
-                <slot name="breakLabel" />}
-            </break-view>
-          );
+          breakView = BreakView({
+            breakLabel: '...',
+            breakClassName: this.breakClassName,
+            key: index
+          })
           items.push(breakView);
         }
       }
