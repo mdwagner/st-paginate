@@ -13,6 +13,8 @@
     }
     li {
       display: inline-block;
+      user-select: none;
+      overflow: hidden;
     }
     .break a {
       cursor: default;
@@ -23,16 +25,15 @@
 </head>
 <body>
 
-  <!-- <my-component first="Stencil" last="'Don't call me a framework' JS"></my-component> -->
-
   <h1 id="derp"></h1>
 
   <pagination-box-view
-    break-class-name="break-me"
+    page-range-displayed="4"
+    margin-pages-displayed="4"
     container-class-name="pagination"
     active-class-name="active"
     id="pagination-comp"
-    page-count="10"></pagination-box-view>
+    page-count="20"></pagination-box-view>
 
   <script>
     var h1 = document.getElementById('derp');
@@ -41,7 +42,6 @@
 
     comp.addEventListener('onPageChange', function (e) {
       var data = e.detail;
-      console.log('data', data);
       h1.innerText = data.selected + 1;
     });
   </script>

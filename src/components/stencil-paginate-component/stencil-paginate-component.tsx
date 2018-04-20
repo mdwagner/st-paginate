@@ -4,8 +4,7 @@ import {
   Event,
   EventEmitter,
   State,
-  Watch,
-  Listen
+  Watch
 } from '@stencil/core';
 
 type Noop = (...args) => any;
@@ -19,7 +18,9 @@ function BreakView({
 
   return (
     <li class={className} {...props}>
-      {label || <slot name="breakLabel" />}
+      <a>
+        {label || <slot name="breakLabel" />}
+      </a>
     </li>
   );
 }
@@ -31,7 +32,6 @@ function PageView({
   pageLinkClassName,
   activeClassName,
   extraAriaContext,
-  href,
   page,
   ...props
 }) {
@@ -53,7 +53,6 @@ function PageView({
     <li class={cssClassName || undefined} {...props}>
       <a onClick={onClick}
         class={pageLinkClassName}
-        href={href}
         tabIndex={0}
         aria-label={ariaLabel}
         aria-current={ariaCurrent}
@@ -94,17 +93,8 @@ export class PaginationBoxView {
   @Event() onPageChange: EventEmitter;
 
   @State() state = {
-    selected: this.initialPage || this.forcePage || 0,
-    hrefBuilder: noop
+    selected: this.initialPage || this.forcePage || 0
   };
-
-  @Listen('hrefBuilder')
-  hrefBuilderHandler(event: CustomEvent) {
-    this.state = {
-      ...this.state,
-      hrefBuilder: event.detail as Noop
-    };
-  }
 
   componentWillLoad() {
     if (typeof this.initialPage !== 'undefined' && !this.disableInitialCallback) {
@@ -153,16 +143,6 @@ export class PaginationBoxView {
     this.callCallback(selected);
   }
 
-  hrefBuilder(pageIndex) {
-    if (this.state.hrefBuilder &&
-      pageIndex !== this.state.selected &&
-      pageIndex >= 0 &&
-      pageIndex < this.pageCount
-    ) {
-      return this.state.hrefBuilder(pageIndex + 1);
-    }
-  }
-
   callCallback = (selectedItem) => {
     this.onPageChange.emit({ selected: selectedItem });
   }
@@ -178,7 +158,6 @@ export class PaginationBoxView {
       pageLinkClassName: this.pageLinkClassName,
       activeClassName: this.activeClassName,
       extraAriaContext: this.extraAriaContext,
-      href: this.hrefBuilder(index),
       page: index + 1
     });
   }
@@ -251,7 +230,6 @@ export class PaginationBoxView {
         <li class={previousClasses}>
           <a onClick={(e) => this.handlePreviousPage(e)}
             class={this.previousLinkClassName}
-            href={this.hrefBuilder(selected - 1)}
             tabIndex={0}
             onKeyPress={(e) => this.handlePreviousPage(e)}>
             {this.showDefaultPreviousLabel ?
@@ -266,7 +244,6 @@ export class PaginationBoxView {
         <li class={nextClasses}>
           <a onClick={(e) => this.handleNextPage(e)}
             class={this.nextLinkClassName}
-            href={this.hrefBuilder(selected + 1)}
             tabIndex={0}
             onKeyPress={(e) => this.handleNextPage(e)}>
             {this.showDefaultNextLabel ?
