@@ -20,20 +20,20 @@
       cursor: default;
     }
   </style>
-  <script src="/build/mycomponent.js"></script>
+  <script src="/build/stencilpaginate.js"></script>
 
 </head>
 <body>
 
   <h1 id="derp"></h1>
 
-  <pagination-box-view
+  <stencil-paginate
     page-range-displayed="4"
     margin-pages-displayed="4"
     container-class-name="pagination"
     active-class-name="active"
     id="pagination-comp"
-    page-count="20"></pagination-box-view>
+    page-count="20"></stencil-paginate>
 
   <div id="root"></div>
 
@@ -95,7 +95,7 @@
         return (
           h('div', null,
             h('h1', null, 'Page # ' + _this.state.currentPage),
-            h('pagination-box-view', {
+            h('stencil-paginate', {
               ref: function (r) { _this.compRef = r; },
               'page-range-displayed': 4,
               'margin-pages-displayed': 4,
