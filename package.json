@@ -15,7 +15,7 @@
     "serve": "stencil-dev-server",
     "start": "npm run dev",
     "test": "jest --no-cache",
-    "test.watch": "jest --watch --no-cache"
+    "test:watch": "jest --watch --no-cache"
   },
   "dependencies": {},
   "devDependencies": {

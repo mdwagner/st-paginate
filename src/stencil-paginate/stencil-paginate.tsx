@@ -64,11 +64,11 @@ function PageView({
 }
 
 @Component({
-  tag: 'pagination-box-view',
+  tag: 'stencil-paginate',
   shadow: false,
   scoped: false
 })
-export class PaginationBoxView {
+export class StencilPaginate {
   @Prop() pageCount: number = 10;
   @Prop() pageRangeDisplayed: number = 2;
   @Prop() marginPagesDisplayed: number = 3;

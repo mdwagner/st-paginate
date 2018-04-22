@@ -1,1 +1,1 @@
-export { PaginationBoxView } from "./stencil-paginate";
+export { StencilPaginate } from "./stencil-paginate";
