@@ -35,6 +35,10 @@
     id="pagination-comp"
     page-count="20"></pagination-box-view>
 
+  <div id="root"></div>
+
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
   <script>
     var h1 = document.getElementById('derp');
     h1.innerText = 1;
@@ -44,6 +48,72 @@
       var data = e.detail;
       h1.innerText = data.selected + 1;
     });
+
+    //-------------------------------------------------------
+    // window.React, window.ReactDOM
+    var StencilPaginateWrapper = (function() {
+      var Component = window.React.Component;
+      StencilPaginateWrapper.prototype = Object.create(Component && Component.prototype, {
+        constructor: {
+          value: StencilPaginateWrapper,
+          enumerable: false,
+          writable: false,
+          configurable: true
+        }
+      });
+      if (Component) {
+        Object.setPrototypeOf
+          ? Object.setPrototypeOf(StencilPaginateWrapper, Component)
+          : (StencilPaginateWrapper.__proto__ = Component);
+      }
+
+      function StencilPaginateWrapper() {
+        // constructor
+        this.state = {
+          currentPage: 1
+        };
+        this.handleChange = this.handleChange.bind(this);
+      }
+
+      StencilPaginateWrapper.prototype.handleChange = function(e) {
+        this.setState({
+          currentPage: e.detail.selected + 1
+        });
+      }
+
+      StencilPaginateWrapper.prototype.componentDidMount = function() {
+        this.compRef.addEventListener('onPageChange', this.handleChange);
+      }
+
+      StencilPaginateWrapper.prototype.componentWillUnmount = function() {
+        this.compRef.removeEventListener('onPageChange', this.handleChange);
+      }
+
+      StencilPaginateWrapper.prototype.render = function() {
+        var h = window.React.createElement;
+        var _this = this;
+        return (
+          h('div', null,
+            h('h1', null, 'Page # ' + _this.state.currentPage),
+            h('pagination-box-view', {
+              ref: function (r) { _this.compRef = r; },
+              'page-range-displayed': 4,
+              'margin-pages-displayed': 4,
+              'container-class-name': 'pagination',
+              'active-class-name': 'active',
+              // id: 'react-pagination-comp',
+              'page-count': 25
+            })
+          )
+        );
+      }
+      return StencilPaginateWrapper;
+    }());
+
+    window.ReactDOM.render(
+      window.React.createElement(StencilPaginateWrapper),
+      document.getElementById('root')
+    );
   </script>
 </body>
 </html>
