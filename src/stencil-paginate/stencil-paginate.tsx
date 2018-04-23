@@ -12,12 +12,11 @@ const noop: Noop = () => {};
 
 function BreakView({
   breakLabel: label,
-  breakClassName: className = 'break',
-  ...props
+  breakClassName: className = 'break'
 }) {
 
   return (
-    <li class={className} {...props}>
+    <li class={className}>
       <a>
         {label || <slot name="breakLabel" />}
       </a>
@@ -32,8 +31,7 @@ function PageView({
   pageLinkClassName,
   activeClassName,
   extraAriaContext,
-  page,
-  ...props
+  page
 }) {
   let cssClassName = pageClassName;
   let ariaLabel = `Page ${page}${extraAriaContext ? ' ' + extraAriaContext : ''}`;
@@ -50,7 +48,7 @@ function PageView({
   }
 
   return (
-    <li class={cssClassName || undefined} {...props}>
+    <li class={cssClassName || undefined}>
       <a onClick={onClick}
         class={pageLinkClassName}
         tabIndex={0}
@@ -105,10 +103,9 @@ export class StencilPaginate {
   @Watch('forcePage')
   watchForcePage(newForcePage: number, oldForcePage: number) {
     if (typeof newForcePage !== 'undefined' && oldForcePage !== newForcePage) {
-      this.state = {
-        ...this.state,
+      this.state = Object.assign({}, this.state, {
         selected: newForcePage
-      };
+      });
     }
   }
 
@@ -134,10 +131,9 @@ export class StencilPaginate {
 
     if (this.state.selected === selected) return;
 
-    this.state = {
-      ...this.state,
+    this.state = Object.assign({}, this.state, {
       selected
-    };
+    });
 
     // Call the callback with the new selected item:
     this.callCallback(selected);
@@ -151,7 +147,6 @@ export class StencilPaginate {
     const { selected } = this.state;
 
     return PageView({
-      key: index,
       onClick: this.handlePageSelected.bind(this, index),
       selected: selected === index,
       pageClassName: this.pageClassName,
@@ -208,8 +203,7 @@ export class StencilPaginate {
         if (this.showDefaultBreakLabel && items[items.length - 1] !== breakView) {
           breakView = BreakView({
             breakLabel: '...',
-            breakClassName: this.breakClassName,
-            key: index
+            breakClassName: this.breakClassName
           })
           items.push(breakView);
         }

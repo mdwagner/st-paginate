@@ -8,6 +8,9 @@ exports.config = {
       type: 'www',
       serviceWorker: false
     }
+  ],
+  bundles: [
+    { components: ['stencil-paginate'] }
   ]
 };
 
