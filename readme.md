@@ -5,6 +5,10 @@
 
 A _standard web component_ port of [_AdeleD's_ ReactPaginate](https://github.com/AdeleD/react-paginate).
 
+## Why?
+
+I wanted to see if I could take a ReactJS component package and re-create it as Standard Web Component using Stencil, this is the result of that idea. I had used _ReactPaginate_ recently on a ReactJS project and thought it would be a good candidate. Nothing more, nothing less.
+
 ## Stencil
 
 Stencil is a compiler for building fast web apps using Web Components.
@@ -17,16 +21,15 @@ Stencil components are just Web Components, so they work in any major framework 
 
 ### Script tag
 
-- [Publish to NPM](https://docs.npmjs.com/getting-started/publishing-npm-packages)
-- Put a script tag similar to this `<script src='https://unpkg.com/my-component@0.0.1/dist/mycomponent.js'></script>` in the head of your index.html
+- Put a script tag similar to this `<script src='https://unpkg.com/st-paginate@0.0.1/dist/stpaginate.js'></script>` in the head of your index.html
 - Then you can use the element anywhere in your template, JSX, html etc
 
 ### Node Modules
-- Run `npm install my-component --save`
-- Put a script tag similar to this `<script src='node_modules/my-component/dist/mycomponent.js'></script>` in the head of your index.html
+- Run `npm install st-paginate --save`
+- Put a script tag similar to this `<script src='node_modules/st-paginate/dist/stpaginate.js'></script>` in the head of your index.html
 - Then you can use the element anywhere in your template, JSX, html etc
 
 ### In a stencil-starter app
-- Run `npm install my-component --save`
-- Add `{ name: 'my-component' }` to your [collections](https://github.com/ionic-team/stencil-starter/blob/master/stencil.config.js#L5)
+- Run `npm install st-paginate --save`
+- Add `{ name: 'st-paginate' }` to your [collections](https://github.com/ionic-team/stencil-starter/blob/master/stencil.config.js#L5)
 - Then you can use the element anywhere in your template, JSX, html etc
