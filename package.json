@@ -26,6 +26,10 @@
     "jest": "^21.2.1"
   },
   "author": "mdwagner",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mdwagner/st-paginate.git"
+  },
   "license": "MIT",
   "jest": {
     "transform": {
