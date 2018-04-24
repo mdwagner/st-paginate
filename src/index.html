@@ -20,20 +20,20 @@
       cursor: default;
     }
   </style>
-  <script src="/build/stencilpaginate.js"></script>
+  <script src="/build/stpaginate.js"></script>
 
 </head>
 <body>
 
   <h1 id="derp"></h1>
 
-  <stencil-paginate
+  <st-paginate
     page-range-displayed="4"
     margin-pages-displayed="4"
     container-class-name="pagination"
     active-class-name="active"
     id="pagination-comp"
-    page-count="20"></stencil-paginate>
+    page-count="20"></st-paginate>
 
   <div id="root"></div>
 
@@ -51,11 +51,11 @@
 
     //-------------------------------------------------------
     // window.React, window.ReactDOM
-    var StencilPaginateWrapper = (function() {
+    var StPaginateWrapper = (function() {
       var Component = window.React.Component;
-      StencilPaginateWrapper.prototype = Object.create(Component && Component.prototype, {
+      StPaginateWrapper.prototype = Object.create(Component && Component.prototype, {
         constructor: {
-          value: StencilPaginateWrapper,
+          value: StPaginateWrapper,
           enumerable: false,
           writable: false,
           configurable: true
@@ -63,11 +63,11 @@
       });
       if (Component) {
         Object.setPrototypeOf
-          ? Object.setPrototypeOf(StencilPaginateWrapper, Component)
-          : (StencilPaginateWrapper.__proto__ = Component);
+          ? Object.setPrototypeOf(StPaginateWrapper, Component)
+          : (StPaginateWrapper.__proto__ = Component);
       }
 
-      function StencilPaginateWrapper() {
+      function StPaginateWrapper() {
         // constructor
         this.state = {
           currentPage: 1
@@ -75,27 +75,27 @@
         this.handleChange = this.handleChange.bind(this);
       }
 
-      StencilPaginateWrapper.prototype.handleChange = function(e) {
+      StPaginateWrapper.prototype.handleChange = function(e) {
         this.setState({
           currentPage: e.detail.selected + 1
         });
       }
 
-      StencilPaginateWrapper.prototype.componentDidMount = function() {
+      StPaginateWrapper.prototype.componentDidMount = function() {
         this.compRef.addEventListener('onPageChange', this.handleChange);
       }
 
-      StencilPaginateWrapper.prototype.componentWillUnmount = function() {
+      StPaginateWrapper.prototype.componentWillUnmount = function() {
         this.compRef.removeEventListener('onPageChange', this.handleChange);
       }
 
-      StencilPaginateWrapper.prototype.render = function() {
+      StPaginateWrapper.prototype.render = function() {
         var h = window.React.createElement;
         var _this = this;
         return (
           h('div', null,
             h('h1', null, 'Page # ' + _this.state.currentPage),
-            h('stencil-paginate', {
+            h('st-paginate', {
               ref: function (r) { _this.compRef = r; },
               'page-range-displayed': 4,
               'margin-pages-displayed': 4,
@@ -107,11 +107,11 @@
           )
         );
       }
-      return StencilPaginateWrapper;
+      return StPaginateWrapper;
     }());
 
     window.ReactDOM.render(
-      window.React.createElement(StencilPaginateWrapper),
+      window.React.createElement(StPaginateWrapper),
       document.getElementById('root')
     );
   </script>

@@ -62,11 +62,11 @@ function PageView({
 }
 
 @Component({
-  tag: 'stencil-paginate',
+  tag: 'st-paginate',
   shadow: false,
   scoped: false
 })
-export class StencilPaginate {
+export class StPaginate {
   @Prop() pageCount: number = 10;
   @Prop() pageRangeDisplayed: number = 2;
   @Prop() marginPagesDisplayed: number = 3;
@@ -103,9 +103,10 @@ export class StencilPaginate {
   @Watch('forcePage')
   watchForcePage(newForcePage: number, oldForcePage: number) {
     if (typeof newForcePage !== 'undefined' && oldForcePage !== newForcePage) {
-      this.state = Object.assign({}, this.state, {
+      this.state = {
+        ...this.state,
         selected: newForcePage
-      });
+      };
     }
   }
 
@@ -131,9 +132,10 @@ export class StencilPaginate {
 
     if (this.state.selected === selected) return;
 
-    this.state = Object.assign({}, this.state, {
+    this.state = {
+      ...this.state,
       selected
-    });
+    };
 
     // Call the callback with the new selected item:
     this.callCallback(selected);

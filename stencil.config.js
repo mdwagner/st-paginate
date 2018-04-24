@@ -1,5 +1,5 @@
 exports.config = {
-  namespace: 'stencilpaginate',
+  namespace: 'stpaginate',
   outputTargets:[
     {
       type: 'dist'
@@ -10,7 +10,7 @@ exports.config = {
     }
   ],
   bundles: [
-    { components: ['stencil-paginate'] }
+    { components: ['st-paginate'] }
   ]
 };
 

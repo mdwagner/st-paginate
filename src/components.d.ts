@@ -27,7 +27,7 @@ declare global {
 declare global {
 
   namespace StencilComponents {
-    interface StencilPaginate {
+    interface StPaginate {
       'activeClassName': string;
       'breakClassName': string;
       'containerClassName': string;
@@ -51,25 +51,25 @@ declare global {
     }
   }
 
-  interface HTMLStencilPaginateElement extends StencilComponents.StencilPaginate, HTMLStencilElement {}
+  interface HTMLStPaginateElement extends StencilComponents.StPaginate, HTMLStencilElement {}
 
-  var HTMLStencilPaginateElement: {
-    prototype: HTMLStencilPaginateElement;
-    new (): HTMLStencilPaginateElement;
+  var HTMLStPaginateElement: {
+    prototype: HTMLStPaginateElement;
+    new (): HTMLStPaginateElement;
   };
   interface HTMLElementTagNameMap {
-    'stencil-paginate': HTMLStencilPaginateElement;
+    'st-paginate': HTMLStPaginateElement;
   }
   interface ElementTagNameMap {
-    'stencil-paginate': HTMLStencilPaginateElement;
+    'st-paginate': HTMLStPaginateElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      'stencil-paginate': JSXElements.StencilPaginateAttributes;
+      'st-paginate': JSXElements.StPaginateAttributes;
     }
   }
   namespace JSXElements {
-    export interface StencilPaginateAttributes extends HTMLAttributes {
+    export interface StPaginateAttributes extends HTMLAttributes {
       'activeClassName'?: string;
       'breakClassName'?: string;
       'containerClassName'?: string;

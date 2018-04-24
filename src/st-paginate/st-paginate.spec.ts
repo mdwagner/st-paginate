@@ -1,9 +1,9 @@
 import { TestWindow } from '@stencil/core/testing';
-import { StencilPaginate } from './stencil-paginate';
+import { StPaginate } from './st-paginate';
 
-describe('stencil-paginate', () => {
+describe('st-paginate', () => {
   it('should build', () => {
-    expect(new StencilPaginate()).toBeTruthy();
+    expect(new StPaginate()).toBeTruthy();
   });
 
   describe('rendering', () => {
@@ -12,8 +12,8 @@ describe('stencil-paginate', () => {
     beforeEach(async () => {
       testWindow = new TestWindow();
       element = await testWindow.load({
-        components: [StencilPaginate],
-        html: '<stencil-paginate></stencil-paginate>'
+        components: [StPaginate],
+        html: '<st-paginate></st-paginate>'
       });
     });
 
