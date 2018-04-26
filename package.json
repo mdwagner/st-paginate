@@ -15,6 +15,8 @@
     "serve": "stencil-dev-server",
     "start": "npm run dev",
     "test": "jest --no-cache",
+    "pretest:ci": "rimraf reports",
+    "test:ci": "jest --ci --runInBand --testResultsProcessor='jest-junit'",
     "test:watch": "jest --watch --no-cache"
   },
   "dependencies": {},
@@ -23,7 +25,9 @@
     "@stencil/dev-server": "latest",
     "@stencil/utils": "latest",
     "@types/jest": "^21.1.1",
-    "jest": "^21.2.1"
+    "jest": "^21.2.1",
+    "jest-junit": "^3.6.0",
+    "rimraf": "^2.6.2"
   },
   "author": "mdwagner",
   "repository": {
@@ -43,5 +47,8 @@
       "json",
       "jsx"
     ]
+  },
+  "jest-junit": {
+    "output": "reports/junit/js-test-results.xml"
   }
 }
