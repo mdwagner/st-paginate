@@ -19,7 +19,6 @@ describe('st-paginate', () => {
 
     it('should work without parameters', () => {
       expect(element.textContent.trim()).toEqual('Previous123...8910Next');
-      expect(true).toBe(false);
     });
 
     it('should work with a page count of 30', () => {
