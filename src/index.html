@@ -25,8 +25,7 @@
 </head>
 <body>
 
-  <h1 id="derp"></h1>
-
+  <h1 id="currentPage"></h1>
   <st-paginate
     page-range-displayed="4"
     margin-pages-displayed="4"
@@ -35,85 +34,14 @@
     id="pagination-comp"
     page-count="20"></st-paginate>
 
-  <div id="root"></div>
-
-  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
   <script>
-    var h1 = document.getElementById('derp');
-    h1.innerText = 1;
-    var comp = document.getElementById('pagination-comp');
-
-    comp.addEventListener('onPageChange', function (e) {
-      var data = e.detail;
-      h1.innerText = data.selected + 1;
-    });
-
-    //-------------------------------------------------------
-    // window.React, window.ReactDOM
-    var StPaginateWrapper = (function() {
-      var Component = window.React.Component;
-      StPaginateWrapper.prototype = Object.create(Component && Component.prototype, {
-        constructor: {
-          value: StPaginateWrapper,
-          enumerable: false,
-          writable: false,
-          configurable: true
-        }
+    var currentPageText = document.getElementById('currentPage');
+    currentPageText.innerText = 1;
+    document.getElementById('pagination-comp')
+      .addEventListener('onPageChange', function (e) {
+        currentPageText.innerText = e.detail.selected + 1;
       });
-      if (Component) {
-        Object.setPrototypeOf
-          ? Object.setPrototypeOf(StPaginateWrapper, Component)
-          : (StPaginateWrapper.__proto__ = Component);
-      }
-
-      function StPaginateWrapper() {
-        // constructor
-        this.state = {
-          currentPage: 1
-        };
-        this.handleChange = this.handleChange.bind(this);
-      }
-
-      StPaginateWrapper.prototype.handleChange = function(e) {
-        this.setState({
-          currentPage: e.detail.selected + 1
-        });
-      }
-
-      StPaginateWrapper.prototype.componentDidMount = function() {
-        this.compRef.addEventListener('onPageChange', this.handleChange);
-      }
-
-      StPaginateWrapper.prototype.componentWillUnmount = function() {
-        this.compRef.removeEventListener('onPageChange', this.handleChange);
-      }
-
-      StPaginateWrapper.prototype.render = function() {
-        var h = window.React.createElement;
-        var _this = this;
-        return (
-          h('div', null,
-            h('h1', null, 'Page # ' + _this.state.currentPage),
-            h('st-paginate', {
-              ref: function (r) { _this.compRef = r; },
-              'page-range-displayed': 4,
-              'margin-pages-displayed': 4,
-              'container-class-name': 'pagination',
-              'active-class-name': 'active',
-              // id: 'react-pagination-comp',
-              'page-count': 25
-            })
-          )
-        );
-      }
-      return StPaginateWrapper;
-    }());
-
-    window.ReactDOM.render(
-      window.React.createElement(StPaginateWrapper),
-      document.getElementById('root')
-    );
   </script>
+
 </body>
 </html>
