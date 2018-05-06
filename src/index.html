@@ -31,14 +31,18 @@
     margin-pages-displayed="4"
     container-class-name="pagination"
     active-class-name="active"
+    previous-label-text="Previous Label"
+    next-label-text="Next Label"
+    break-label-text=".*."
     id="pagination-comp"
-    page-count="20"></st-paginate>
+    page-count="20">
+  </st-paginate>
 
   <script>
     var currentPageText = document.getElementById('currentPage');
     currentPageText.innerText = 1;
     document.getElementById('pagination-comp')
-      .addEventListener('onPageChange', function (e) {
+      .addEventListener('pageChange', function (e) {
         currentPageText.innerText = e.detail.selected + 1;
       });
   </script>

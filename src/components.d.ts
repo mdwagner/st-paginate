@@ -30,6 +30,7 @@ declare global {
     interface StPaginate {
       'activeClassName': string;
       'breakClassName': string;
+      'breakLabelText': string;
       'containerClassName': string;
       'disableInitialCallback': boolean;
       'disabledClassName': string;
@@ -38,16 +39,17 @@ declare global {
       'initialPage': number;
       'marginPagesDisplayed': number;
       'nextClassName': string;
+      'nextLabelClassName': string;
+      'nextLabelText': string;
       'nextLinkClassName': string;
       'pageClassName': string;
       'pageCount': number;
       'pageLinkClassName': string;
       'pageRangeDisplayed': number;
       'previousClassName': string;
+      'previousLabelClassName': string;
+      'previousLabelText': string;
       'previousLinkClassName': string;
-      'showDefaultBreakLabel': boolean;
-      'showDefaultNextLabel': boolean;
-      'showDefaultPreviousLabel': boolean;
     }
   }
 
@@ -72,6 +74,7 @@ declare global {
     export interface StPaginateAttributes extends HTMLAttributes {
       'activeClassName'?: string;
       'breakClassName'?: string;
+      'breakLabelText'?: string;
       'containerClassName'?: string;
       'disableInitialCallback'?: boolean;
       'disabledClassName'?: string;
@@ -80,17 +83,18 @@ declare global {
       'initialPage'?: number;
       'marginPagesDisplayed'?: number;
       'nextClassName'?: string;
+      'nextLabelClassName'?: string;
+      'nextLabelText'?: string;
       'nextLinkClassName'?: string;
-      'onOnPageChange'?: (event: CustomEvent) => void;
+      'onPageChange'?: (event: CustomEvent) => void;
       'pageClassName'?: string;
       'pageCount'?: number;
       'pageLinkClassName'?: string;
       'pageRangeDisplayed'?: number;
       'previousClassName'?: string;
+      'previousLabelClassName'?: string;
+      'previousLabelText'?: string;
       'previousLinkClassName'?: string;
-      'showDefaultBreakLabel'?: boolean;
-      'showDefaultNextLabel'?: boolean;
-      'showDefaultPreviousLabel'?: boolean;
     }
   }
 }
