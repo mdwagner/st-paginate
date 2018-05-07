@@ -10,31 +10,31 @@ A _standard web component_ port of [_AdeleD's_ ReactPaginate](https://github.com
 
 Each prop name has a corresponding tag name in `kabab-case`.
 
-| Name                      | Type          | Default    | Description                                                                                            |
-| ---                       | ---           | ---        | ---                                                                                                    |
-| `pageCount`               | `number`      | `10`       | The total number of pages.                                                                             |
-| `pageRangeDisplayed`      | `number`      | `2`        | The range of pages displayed.                                                                          |
-| `marginPagesDisplayed`    | `number`      | `3`        | The number of pages to display for margins.                                                            |
-| `nextLabelText`           | `string`      | `Next`     | The label text for the `next` button.                                                                  |
-| `previousLabelText`       | `string`      | `Previous` | The label text for the `previous` button.                                                              |
-| `breakLabelText`          | `string`      | `...`      | The label text for the ellipsis.                                                                       |
-| `breakClassName`          | `string`      | `break`    | The classname on the `li` tag of the ellipsis element.                                                 |
-| `nextLabelClassName`      | `string`      |            | The classname on the `span` tag of the `next` text.                                                    |
-| `previousLabelClassName`  | `string`      |            | The classname on the `li` tag of the `previous` text.                                                  |
-| `pageChange`              | `CustomEvent` |            | The event that gets fired when a page is clicked. Event => detail => selected. Zero-based page number. |
-| `initialPage`             | `number`      |            | The initial page selected.                                                                             |
-| `forcePage`               | `number`      |            | To override selected page with parent prop.                                                            |
-| `disableInitialCallback`  | `boolean`     | `false`    | Disable `pageChange` event with initial page.                                                          |
-| `containerClassName`      | `string`      |            | The classname of the pagination container.                                                             |
-| `pageClassName`           | `string`      |            | The classname on the `li` tag of each page element.                                                    |
-| `pageLinkClassName`       | `string`      |            | The classname on the `a` tag of each page element.                                                     |
-| `activeClassName`         | `string`      | `selected` | The classname for the active page.                                                                     |
-| `previousClassName`       | `string`      | `previous` | The classname on the `li` tag of the `previous` button.                                                |
-| `nextClassName`           | `string`      | `next`     | The classname on the `li` tag of the `next` button.                                                    |
-| `previousLinkClassName`   | `string`      |            | The classname on the `a` tag of the `previous` button.                                                 |
-| `nextLinkClassName`       | `string`      |            | The classname on the `a` tag of the `next` button.                                                     |
-| `disabledClassName`       | `string`      | `disabled` | The classname for disabled `previous` and `next` button.                                               |
-| `extraAriaContext`        | `string`      |            | Extra context to add to the `aria-label` HTML attribute.                                               |
+| Name                      | Type          | Default  | Description                                                                                            |
+| ---                       | ---           | ---      | ---                                                                                                    |
+| `pageCount`               | `number`      | 10       | The total number of pages.                                                                             |
+| `pageRangeDisplayed`      | `number`      | 2        | The range of pages displayed.                                                                          |
+| `marginPagesDisplayed`    | `number`      | 3        | The number of pages to display for margins.                                                            |
+| `nextLabelText`           | `string`      | Next     | The label text for the `next` button.                                                                  |
+| `previousLabelText`       | `string`      | Previous | The label text for the `previous` button.                                                              |
+| `breakLabelText`          | `string`      | ...      | The label text for the ellipsis.                                                                       |
+| `breakClassName`          | `string`      | break    | The classname on the `li` tag of the ellipsis element.                                                 |
+| `nextLabelClassName`      | `string`      |          | The classname on the `span` tag of the `next` text.                                                    |
+| `previousLabelClassName`  | `string`      |          | The classname on the `li` tag of the `previous` text.                                                  |
+| `pageChange`              | `CustomEvent` |          | The event that gets fired when a page is clicked. Event => detail => selected. Zero-based page number. |
+| `initialPage`             | `number`      |          | The initial page selected.                                                                             |
+| `forcePage`               | `number`      |          | To override selected page with parent prop.                                                            |
+| `disableInitialCallback`  | `boolean`     | false    | Disable `pageChange` event with initial page.                                                          |
+| `containerClassName`      | `string`      |          | The classname of the pagination container.                                                             |
+| `pageClassName`           | `string`      |          | The classname on the `li` tag of each page element.                                                    |
+| `pageLinkClassName`       | `string`      |          | The classname on the `a` tag of each page element.                                                     |
+| `activeClassName`         | `string`      | selected | The classname for the active page.                                                                     |
+| `previousClassName`       | `string`      | previous | The classname on the `li` tag of the `previous` button.                                                |
+| `nextClassName`           | `string`      | next     | The classname on the `li` tag of the `next` button.                                                    |
+| `previousLinkClassName`   | `string`      |          | The classname on the `a` tag of the `previous` button.                                                 |
+| `nextLinkClassName`       | `string`      |          | The classname on the `a` tag of the `next` button.                                                     |
+| `disabledClassName`       | `string`      | disabled | The classname for disabled `previous` and `next` button.                                               |
+| `extraAriaContext`        | `string`      |          | Extra context to add to the `aria-label` HTML attribute.                                               |
 
 ## Usage
 
