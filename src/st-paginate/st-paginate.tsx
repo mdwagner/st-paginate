@@ -73,6 +73,7 @@ export class StPaginate {
   @Prop() nextLabelText: string = 'Next';
   @Prop() previousLabelText: string = 'Previous';
   @Prop() breakLabelText: string = '...';
+  @Prop() breakClassName: string = 'break';
   @Prop() nextLabelClassName: string = '';
   @Prop() previousLabelClassName: string = '';
   @Prop() initialPage: number;
@@ -84,10 +85,9 @@ export class StPaginate {
   @Prop() activeClassName: string = 'selected';
   @Prop() previousClassName: string = 'previous';
   @Prop() nextClassName: string = 'next';
-  @Prop() previousLinkClassName: string;
+  @Prop() previousLinkClassName: string = '';
   @Prop() nextLinkClassName: string = '';
   @Prop() disabledClassName: string = 'disabled';
-  @Prop() breakClassName: string = 'break';
   @Prop() extraAriaContext: string = '';
 
   @Event() pageChange: EventEmitter;
