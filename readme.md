@@ -8,9 +8,7 @@ A _standard web component_ port of [_AdeleD's_ ReactPaginate](https://github.com
 
 ## Props
 
-\* The corresponding tag name is in `kabab-case`.
-
-\** Mostly all props documentation is the same from the ReactJS package above.
+Each prop name has a corresponding tag name in `kabab-case`.
 
 | Name                      | Type          | Default    | Description                                                                                            |
 | ---                       | ---           | ---        | ---                                                                                                    |
