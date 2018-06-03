@@ -83,7 +83,7 @@ Stencil components are just Web Components, so they work in any major framework 
 
 ### Script tag
 
-- Put a script tag similar to this `<script src='https://unpkg.com/st-paginate@0.0.1/dist/stpaginate.js'></script>` in the head of your index.html
+- Put a script tag similar to this `<script src='https://unpkg.com/st-paginate@0.0.2/dist/stpaginate.js'></script>` in the head of your index.html
 - Then you can use the element anywhere in your template, JSX, html etc
 
 ### Node Modules
