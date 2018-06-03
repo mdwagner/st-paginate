@@ -6,6 +6,67 @@
 
 A _standard web component_ port of [_AdeleD's_ ReactPaginate](https://github.com/AdeleD/react-paginate).
 
+## Props
+
+Each prop name has a corresponding tag name in `kabab-case`.
+
+| Name                      | Type          | Default  | Description                                                                                            |
+| ---                       | ---           | ---      | ---                                                                                                    |
+| `pageCount`               | `number`      | 10       | The total number of pages.                                                                             |
+| `pageRangeDisplayed`      | `number`      | 2        | The range of pages displayed.                                                                          |
+| `marginPagesDisplayed`    | `number`      | 3        | The number of pages to display for margins.                                                            |
+| `nextLabelText`           | `string`      | Next     | The label text for the `next` button.                                                                  |
+| `previousLabelText`       | `string`      | Previous | The label text for the `previous` button.                                                              |
+| `breakLabelText`          | `string`      | ...      | The label text for the ellipsis.                                                                       |
+| `breakClassName`          | `string`      | break    | The classname on the `li` tag of the ellipsis element.                                                 |
+| `nextLabelClassName`      | `string`      |          | The classname on the `span` tag of the `next` text.                                                    |
+| `previousLabelClassName`  | `string`      |          | The classname on the `li` tag of the `previous` text.                                                  |
+| `pageChange`              | `CustomEvent` |          | The event that gets fired when a page is clicked. Event => detail => selected. Zero-based page number. |
+| `initialPage`             | `number`      |          | The initial page selected.                                                                             |
+| `forcePage`               | `number`      |          | To override selected page with parent prop.                                                            |
+| `disableInitialCallback`  | `boolean`     | false    | Disable `pageChange` event with initial page.                                                          |
+| `containerClassName`      | `string`      |          | The classname of the pagination container.                                                             |
+| `pageClassName`           | `string`      |          | The classname on the `li` tag of each page element.                                                    |
+| `pageLinkClassName`       | `string`      |          | The classname on the `a` tag of each page element.                                                     |
+| `activeClassName`         | `string`      | selected | The classname for the active page.                                                                     |
+| `previousClassName`       | `string`      | previous | The classname on the `li` tag of the `previous` button.                                                |
+| `nextClassName`           | `string`      | next     | The classname on the `li` tag of the `next` button.                                                    |
+| `previousLinkClassName`   | `string`      |          | The classname on the `a` tag of the `previous` button.                                                 |
+| `nextLinkClassName`       | `string`      |          | The classname on the `a` tag of the `next` button.                                                     |
+| `disabledClassName`       | `string`      | disabled | The classname for disabled `previous` and `next` button.                                               |
+| `extraAriaContext`        | `string`      |          | Extra context to add to the `aria-label` HTML attribute.                                               |
+
+## Usage
+
+### HTML
+
+```html
+<st-paginate
+  page-range-displayed="4"
+  margin-pages-displayed="4"
+  container-class-name="pagination"
+  active-class-name="active"
+  previous-label-text="Previous Label"
+  next-label-text="Next Label"
+  break-label-text=".*."
+  id="pagination-comp"
+  page-count="20"></st-paginate>
+```
+
+### JavaScript
+
+```js
+document
+  .getElementById('pagination-comp')
+  .addEventListener('pageChange', function (e) {
+    console.log(e.detail.selected + 1); // see `pageChange` above for more information
+  });
+```
+
+## Examples
+
+Check out the [GitHub pages](https://mdwagner.github.io/st-paginate/) link for ReactJS and AngularJS examples.
+
 ## Why?
 
 I wanted to see if I could take a ReactJS component package and re-create it as Standard Web Component using Stencil, this is the result of that idea. I had used _ReactPaginate_ recently on a ReactJS project and thought it would be a good candidate. Nothing more, nothing less.
@@ -22,7 +83,7 @@ Stencil components are just Web Components, so they work in any major framework 
 
 ### Script tag
 
-- Put a script tag similar to this `<script src='https://unpkg.com/st-paginate@0.0.1/dist/stpaginate.js'></script>` in the head of your index.html
+- Put a script tag similar to this `<script src='https://unpkg.com/st-paginate@0.0.2/dist/stpaginate.js'></script>` in the head of your index.html
 - Then you can use the element anywhere in your template, JSX, html etc
 
 ### Node Modules

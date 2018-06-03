@@ -10,15 +10,17 @@ import {
 type Noop = (...args) => any;
 const noop: Noop = () => {};
 
-function BreakView({
-  breakLabel: label,
-  breakClassName: className = 'break'
-}) {
+interface IBreakView {
+  breakLabel: string;
+  breakClassName: string;
+}
 
+function BreakView(props: IBreakView): JSX.Element {
+  const { breakLabel, breakClassName } = props;
   return (
-    <li class={className}>
+    <li class={breakClassName}>
       <a>
-        {label || <slot name="breakLabel" />}
+        {breakLabel}
       </a>
     </li>
   );
@@ -48,7 +50,7 @@ function PageView({
   }
 
   return (
-    <li class={cssClassName || undefined}>
+    <li class={cssClassName}>
       <a onClick={onClick}
         class={pageLinkClassName}
         tabIndex={0}
@@ -70,25 +72,27 @@ export class StPaginate {
   @Prop() pageCount: number = 10;
   @Prop() pageRangeDisplayed: number = 2;
   @Prop() marginPagesDisplayed: number = 3;
-  @Prop() showDefaultPreviousLabel: boolean = true;
-  @Prop() showDefaultNextLabel: boolean = true;
-  @Prop() showDefaultBreakLabel: boolean = true;
+  @Prop() nextLabelText: string = 'Next';
+  @Prop() previousLabelText: string = 'Previous';
+  @Prop() breakLabelText: string = '...';
+  @Prop() breakClassName: string = 'break';
+  @Prop() nextLabelClassName: string = '';
+  @Prop() previousLabelClassName: string = '';
   @Prop() initialPage: number;
   @Prop() forcePage: number;
   @Prop() disableInitialCallback: boolean = false;
-  @Prop() containerClassName: string;
+  @Prop() containerClassName: string = '';
   @Prop() pageClassName: string = '';
-  @Prop() pageLinkClassName: string;
+  @Prop() pageLinkClassName: string = '';
   @Prop() activeClassName: string = 'selected';
   @Prop() previousClassName: string = 'previous';
   @Prop() nextClassName: string = 'next';
-  @Prop() previousLinkClassName: string;
-  @Prop() nextLinkClassName: string;
+  @Prop() previousLinkClassName: string = '';
+  @Prop() nextLinkClassName: string = '';
   @Prop() disabledClassName: string = 'disabled';
-  @Prop() breakClassName: string = '';
-  @Prop() extraAriaContext: string;
+  @Prop() extraAriaContext: string = '';
 
-  @Event() onPageChange: EventEmitter;
+  @Event() pageChange: EventEmitter;
 
   @State() state = {
     selected: this.initialPage || this.forcePage || 0
@@ -142,7 +146,7 @@ export class StPaginate {
   }
 
   callCallback = (selectedItem) => {
-    this.onPageChange.emit({ selected: selectedItem });
+    this.pageChange.emit({ selected: selectedItem });
   }
 
   getPageElement(index) {
@@ -202,9 +206,9 @@ export class StPaginate {
           continue;
         }
 
-        if (this.showDefaultBreakLabel && items[items.length - 1] !== breakView) {
+        if (this.breakLabelText && items[items.length - 1] !== breakView) {
           breakView = BreakView({
-            breakLabel: '...',
+            breakLabel: this.breakLabelText,
             breakClassName: this.breakClassName
           })
           items.push(breakView);
@@ -218,34 +222,35 @@ export class StPaginate {
   render() {
     const { selected } = this.state;
 
-    const previousClasses = this.previousClassName + (selected === 0 ? ` ${this.disabledClassName}` : '');
-    const nextClasses = this.nextClassName + (selected === this.pageCount - 1 ? ` ${this.disabledClassName}`: '');
+    const previousClasses = [
+      this.previousClassName,
+      selected === 0 ? this.disabledClassName : ''
+    ].join(' ');
+
+    const nextClasses = [
+      this.nextClassName,
+      selected === this.pageCount ? this.disabledClassName : ''
+    ].join(' ');
 
     return (
       <ul class={this.containerClassName}>
         <li class={previousClasses}>
-          <a onClick={(e) => this.handlePreviousPage(e)}
+          <a onClick={this.handlePreviousPage}
             class={this.previousLinkClassName}
             tabIndex={0}
-            onKeyPress={(e) => this.handlePreviousPage(e)}>
-            {this.showDefaultPreviousLabel ?
-              <span slot="previousLabel">Previous</span>
-              :
-              <slot name="previousLabel" />}
+            onKeyPress={this.handlePreviousPage}>
+            <span class={this.previousLabelClassName}>{this.previousLabelText}</span>
           </a>
         </li>
 
         {this.pagination()}
 
         <li class={nextClasses}>
-          <a onClick={(e) => this.handleNextPage(e)}
+          <a onClick={this.handleNextPage}
             class={this.nextLinkClassName}
             tabIndex={0}
-            onKeyPress={(e) => this.handleNextPage(e)}>
-            {this.showDefaultNextLabel ?
-              <span slot="nextLabel">Next</span>
-              :
-              <slot name="nextLabel" />}
+            onKeyPress={this.handleNextPage}>
+            <span class={this.nextLabelClassName}>{this.nextLabelText}</span>
           </a>
         </li>
       </ul>
