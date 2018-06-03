@@ -3,6 +3,7 @@
   "private": true,
   "description": "st-paginate storybook examples",
   "scripts": {
+    "start": "npm run storybook",
     "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "author": "mdwagner",
