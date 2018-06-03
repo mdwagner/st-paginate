@@ -65,7 +65,7 @@ document
 
 ## Examples
 
-Check out the GitHub pages link for ReactJS and AngularJS examples.
+Check out the [GitHub pages](https://mdwagner.github.io/st-paginate/) link for ReactJS and AngularJS examples.
 
 ## Why?
 
