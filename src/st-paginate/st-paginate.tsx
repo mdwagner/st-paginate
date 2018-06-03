@@ -10,11 +10,13 @@ import {
 type Noop = (...args) => any;
 const noop: Noop = () => {};
 
-function BreakView({
-  breakLabel,
-  breakClassName
-}) {
+interface IBreakView {
+  breakLabel: string;
+  breakClassName: string;
+}
 
+function BreakView(props: IBreakView): JSX.Element {
+  const { breakLabel, breakClassName } = props;
   return (
     <li class={breakClassName}>
       <a>
