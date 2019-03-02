@@ -1,54 +1,45 @@
 {
   "name": "st-paginate",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A no-dependency port of the ReactJS library 'ReactPaginate'",
-  "main": "dist/stpaginate.js",
+  "module": "dist/esm/index.js",
+  "main": "dist/index.js",
   "types": "dist/types/components.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "files": [
     "dist/"
   ],
-  "browser": "dist/stpaginate.js",
+  "jest-junit": {
+    "output": "reports/junit/unit-tests.xml"
+  },
   "scripts": {
-    "build": "stencil build",
-    "dev": "sd concurrent \"stencil build --dev --watch\" \"stencil-dev-server\" ",
-    "serve": "stencil-dev-server",
-    "start": "npm run dev",
-    "test": "jest --no-cache",
-    "pretest:ci": "rimraf reports",
-    "test:ci": "jest --ci --runInBand --testResultsProcessor='jest-junit'",
-    "test:watch": "jest --watch --no-cache"
+    "build": "stencil build --docs",
+    "start": "stencil build --dev --watch --serve",
+    "test": "stencil test --spec",
+    "test:watch": "stencil test --spec --watchAll",
+    "test:e2e": "stencil test --spec --e2e",
+    "test:e2e:watch": "stencil test --spec --e2e --watchAll",
+    "test:ci": "stencil test --spec --e2e --ci --reporters=default --reporters=jest-junit"
   },
   "dependencies": {},
   "devDependencies": {
-    "@stencil/core": "^0.7.22",
-    "@stencil/dev-server": "latest",
-    "@stencil/utils": "latest",
-    "@types/jest": "^21.1.1",
-    "jest": "^21.2.1",
-    "jest-junit": "^3.6.0",
-    "rimraf": "^2.6.2"
-  },
-  "author": "mdwagner",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mdwagner/st-paginate.git"
+    "@stencil/core": "~0.16.2",
+    "@types/jest": "23.3.14",
+    "@types/puppeteer": "1.6.4",
+    "jest": "23.6.0",
+    "jest-cli": "23.6.0",
+    "jest-junit": "6.3.0",
+    "puppeteer": "1.8.0"
   },
   "license": "MIT",
-  "jest": {
-    "transform": {
-      "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/@stencil/core/testing/jest.preprocessor.js"
-    },
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(tsx?|jsx?)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "json",
-      "jsx"
-    ]
-  },
-  "jest-junit": {
-    "output": "reports/junit/js-test-results.xml"
-  }
+  "keywords": [
+    "stencil",
+    "stenciljs",
+    "pagination",
+    "paginate",
+    "react",
+    "reactjs",
+    "jsx",
+    "webcomponent"
+  ]
 }

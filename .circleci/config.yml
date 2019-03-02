@@ -6,7 +6,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:carbon
+      - image: circleci/node:latest-browsers
 
     working_directory: ~/repo
 
@@ -22,7 +22,7 @@ jobs:
 
       - run:
           name: "Dependency Install"
-          command: npm install
+          command: npm ci
 
       - save_cache:
           paths:
@@ -33,7 +33,7 @@ jobs:
           name: "Test Suite"
           command: npm run test:ci
           environment:
-            JEST_JUNIT_OUTPUT: "reports/junit/js-test-results.xml"
+            JEST_JUNIT_OUTPUT: "reports/junit/unit-tests.xml"
       - store_test_results:
           path: reports/junit
       - store_artifacts:
