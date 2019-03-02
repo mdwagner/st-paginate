@@ -30,10 +30,10 @@ jobs:
             JEST_JUNIT_OUTPUT: "reports/junit/unit-tests.xml"
 
       - store_test_results:
-          paths: reports/junit
+          path: reports/junit
 
       - store_artifacts:
-          paths: reports/junit
+          path: reports/junit
 
       - save_cache:
           paths:
