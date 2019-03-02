@@ -3,38 +3,72 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2
+
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:latest-browsers
+
 jobs:
-  build:
-    docker:
-      - image: circleci/node:latest-browsers
-
-    working_directory: ~/repo
-
+  test:
+    <<: *defaults
     steps:
       - checkout
 
-      # Download and cache dependencies
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
+          # fallback to using latest cache if no exact match is found
           - v1-dependencies-
 
+      - run: npm ci
+      - run: echo $npm_TOKEN
       - run:
-          name: "Dependency Install"
-          command: npm ci
+          name: Run tests
+          command: npm run test:ci
+          environment:
+            JEST_JUNIT_OUTPUT: "reports/junit/unit-tests.xml"
+
+      - store_test_results:
+          paths: reports/junit
+
+      - store_artifacts:
+          paths: reports/junit
 
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
+      - persist_to_workspace:
+          root: ~/repo
+          paths: .
+
+  deploy:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
       - run:
-          name: "Test Suite"
-          command: npm run test:ci
-          environment:
-            JEST_JUNIT_OUTPUT: "reports/junit/unit-tests.xml"
-      - store_test_results:
-          path: reports/junit
-      - store_artifacts:
-          path: reports/junit
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/repo/.npmrc
+      - run:
+          name: Publish package
+          command: npm run build:npm
+
+workflows:
+  version: 2
+  test-deploy:
+    jobs:
+      - test:
+          filters:
+            tags:
+              only: /^v.*/
+      - deploy:
+          requires:
+            - test
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
