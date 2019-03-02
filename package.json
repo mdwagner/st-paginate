@@ -1,9 +1,9 @@
 {
   "name": "st-paginate",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A no-dependency port of the ReactJS library 'ReactPaginate'",
   "module": "dist/esm/index.js",
-  "main": "dist/index.js",
+  "main": "dist/stpaginate.js",
   "types": "dist/types/components.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "files": [
@@ -17,10 +17,8 @@
     "build:npm": "npm run build && npm publish",
     "build:npm:dry": "npm run build && npm publish --dry-run",
     "start": "stencil build --dev --watch --serve",
-    "test": "stencil test --spec",
-    "test:watch": "stencil test --spec --watchAll",
-    "test:e2e": "stencil test --spec --e2e",
-    "test:e2e:watch": "stencil test --spec --e2e --watchAll",
+    "test": "stencil test --spec --e2e",
+    "test:watch": "stencil test --spec --e2e --watchAll",
     "test:ci": "stencil test --spec --e2e --ci --reporters=default --reporters=jest-junit"
   },
   "dependencies": {},

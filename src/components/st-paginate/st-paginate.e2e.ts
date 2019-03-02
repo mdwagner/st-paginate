@@ -62,6 +62,6 @@ describe('st-paginate', () => {
     await page.waitForChanges();
 
     expect(spy).toHaveReceivedEvent();
-    expect(spy).toHaveReceivedEventDetail({ selected: 2 });
+    expect(spy).toHaveReceivedEventDetail({ selected: 2 }); // Page 3
   });
 });
