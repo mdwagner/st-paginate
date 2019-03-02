@@ -15,6 +15,7 @@
   "scripts": {
     "build": "stencil build --docs",
     "build:npm": "npm run build && npm publish",
+    "build:npm:dry": "npm run build && npm publish --dry-run",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec",
     "test:watch": "stencil test --spec --watchAll",
