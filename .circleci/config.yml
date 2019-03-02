@@ -22,7 +22,7 @@ jobs:
           - v1-dependencies-
 
       - run: npm ci
-      - run: echo "token=$NPM_TOKEN" | cut -c 1
+      - run: echo "token=$NPM_TOKEN" | cut -c 1-8
       - run:
           name: Run tests
           command: npm run test:ci
