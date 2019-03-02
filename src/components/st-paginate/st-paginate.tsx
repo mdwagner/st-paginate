@@ -60,7 +60,7 @@ export class StPaginate {
     }
   }
 
-  handlePreviousPage = evt => {
+  handlePreviousPage = (evt: UIEvent) => {
     const { selected } = this.state;
     evt.preventDefault ? evt.preventDefault() : (evt.returnValue = false);
     if (selected > 0) {
@@ -68,7 +68,7 @@ export class StPaginate {
     }
   }
 
-  handleNextPage = evt => {
+  handleNextPage = (evt: UIEvent) => {
     const { selected } = this.state;
 
     evt.preventDefault ? evt.preventDefault() : (evt.returnValue = false);
@@ -77,7 +77,7 @@ export class StPaginate {
     }
   };
 
-  handlePageSelected = (selected: number, evt) => {
+  handlePageSelected = (selected: number, evt: UIEvent) => {
     evt.preventDefault ? evt.preventDefault() : (evt.returnValue = false);
 
     if (this.state.selected === selected) return;
@@ -133,9 +133,9 @@ export class StPaginate {
         rightSide = this.pageRangeDisplayed - leftSide;
       }
 
-      let page;
-      let breakView;
-      const createPageView = (i) => this.getPageElement(i);
+      let page: number;
+      let breakView: JSX.Element;
+      const createPageView = (i: number) => this.getPageElement(i);
 
       for(let index = 0; index < this.pageCount; index++) {
         page = index + 1;
