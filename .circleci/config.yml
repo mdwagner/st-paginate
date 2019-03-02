@@ -15,14 +15,14 @@ jobs:
     steps:
       - checkout
 
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using latest cache if no exact match is found
-          - v1-dependencies-
+      # - restore_cache:
+      #     keys:
+      #     # when lock file changes, use increasingly general patterns to restore cache
+      #     - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+      #     - node-v1-{{ .Branch }}-
+      #     - node-v1-
 
       - run: npm ci
-      - run: echo "token=$NPM_TOKEN" | cut -c 1-8
       - run:
           name: Run tests
           command: npm run test:ci
@@ -35,10 +35,10 @@ jobs:
       - store_artifacts:
           path: reports/junit
 
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+      # - save_cache:
+      #     paths:
+      #       - ~/usr/local/lib/node_modules  # location depends on npm version
+      #     key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
 
       - persist_to_workspace:
           root: ~/repo
@@ -51,7 +51,7 @@ jobs:
           at: ~/repo
       - run:
           name: Authenticate with registry
-          command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/repo/.npmrc
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
       - run:
           name: Publish package
           command: npm run build:npm
