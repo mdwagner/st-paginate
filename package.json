@@ -31,5 +31,15 @@
     "jest-junit": "6.3.0",
     "puppeteer": "1.8.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "keywords": [
+    "stencil",
+    "stenciljs",
+    "pagination",
+    "paginate",
+    "react",
+    "reactjs",
+    "jsx",
+    "webcomponent"
+  ]
 }
