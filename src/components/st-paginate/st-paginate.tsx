@@ -6,62 +6,8 @@ import {
   State,
   Watch
 } from '@stencil/core';
-
-type Noop = (...args) => any;
-const noop: Noop = () => {};
-
-interface IBreakView {
-  breakLabel: string;
-  breakClassName: string;
-}
-
-function BreakView(props: IBreakView): JSX.Element {
-  const { breakLabel, breakClassName } = props;
-  return (
-    <li class={breakClassName}>
-      <a>
-        {breakLabel}
-      </a>
-    </li>
-  );
-}
-
-function PageView({
-  onClick = noop,
-  selected,
-  pageClassName,
-  pageLinkClassName,
-  activeClassName,
-  extraAriaContext,
-  page
-}) {
-  let cssClassName = pageClassName;
-  let ariaLabel = `Page ${page}${extraAriaContext ? ' ' + extraAriaContext : ''}`;
-  let ariaCurrent = null;
-
-  if (selected) {
-    ariaCurrent = 'page';
-    ariaLabel = `Page ${page} is your current page`;
-    if (typeof cssClassName !== 'undefined') {
-      cssClassName += ` ${activeClassName}`;
-    } else {
-      cssClassName = activeClassName;
-    }
-  }
-
-  return (
-    <li class={cssClassName}>
-      <a onClick={onClick}
-        class={pageLinkClassName}
-        tabIndex={0}
-        aria-label={ariaLabel}
-        aria-current={ariaCurrent}
-        onKeyPress={onClick}>
-        {page}
-      </a>
-    </li>
-  );
-}
+import { BreakView } from './break-view';
+import { PageView } from './page-view';
 
 @Component({
   tag: 'st-paginate',
@@ -131,7 +77,7 @@ export class StPaginate {
     }
   };
 
-  handlePageSelected = (selected, evt) => {
+  handlePageSelected = (selected: number, evt) => {
     evt.preventDefault ? evt.preventDefault() : (evt.returnValue = false);
 
     if (this.state.selected === selected) return;
@@ -145,22 +91,25 @@ export class StPaginate {
     this.callCallback(selected);
   }
 
-  callCallback = (selectedItem) => {
+  callCallback = (selectedItem: number) => {
     this.pageChange.emit({ selected: selectedItem });
   }
 
-  getPageElement(index) {
+  getPageElement(index: number) {
     const { selected } = this.state;
 
-    return PageView({
-      onClick: this.handlePageSelected.bind(this, index),
-      selected: selected === index,
-      pageClassName: this.pageClassName,
-      pageLinkClassName: this.pageLinkClassName,
-      activeClassName: this.activeClassName,
-      extraAriaContext: this.extraAriaContext,
-      page: index + 1
-    });
+    return (
+      <PageView
+        onClick={this.handlePageSelected.bind(this, index)}
+        selected={selected === index}
+        pageClassName={this.pageClassName}
+        pageLinkClassName={this.pageLinkClassName}
+        activeClassName={this.activeClassName}
+        extraAriaContext={this.extraAriaContext}
+        page={index + 1}
+      >
+      </PageView>
+    );
   }
 
   pagination = () => {
@@ -207,10 +156,13 @@ export class StPaginate {
         }
 
         if (this.breakLabelText && items[items.length - 1] !== breakView) {
-          breakView = BreakView({
-            breakLabel: this.breakLabelText,
-            breakClassName: this.breakClassName
-          })
+          breakView = (
+            <BreakView
+              breakLabel={this.breakLabelText}
+              breakClassName={this.breakClassName}
+            >
+            </BreakView>
+          );
           items.push(breakView);
         }
       }
