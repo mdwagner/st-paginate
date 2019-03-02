@@ -1,9 +1,9 @@
 {
   "name": "st-paginate",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A no-dependency port of the ReactJS library 'ReactPaginate'",
   "module": "dist/esm/index.js",
-  "main": "dist/stpaginate.js",
+  "main": "dist/index.js",
   "types": "dist/types/components.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "files": [
