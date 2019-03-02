@@ -1,4 +1,5 @@
 .editorconfig
 .nvmrc
-.travis.yml
-storybook
+/.circleci
+/.stencil
+/www
